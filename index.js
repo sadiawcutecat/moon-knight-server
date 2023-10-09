@@ -55,6 +55,21 @@ async function run() {
         res.send(result);
       })
 
+      app.get('/api/myJewellers', async (req, res) => {
+        try {
+          const em = req.params.email;
+          console.log(em);
+        
+          const result = await jewellerCollection.findOne({ email: em });
+          console.log(result);
+        
+          res.send(result);
+        } catch (error) {
+          console.error(error);
+          res.status(500).send('Internal Server Error');
+        }
+      });
+
     // Send a ping to confirm a successful connection
     await client.db("admin").command({ ping: 1 });
     console.log("Pinged your deployment. You successfully connected to MongoDB!");
