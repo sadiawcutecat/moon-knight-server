@@ -41,6 +41,12 @@ async function run() {
         console.log(result);
         res.send(result);
     })
+    app.post('/api/jewellers',async (req, res) => {
+        const jewellers = req.body;
+        console.log(jewellers);
+        const result = await jewellerCollection.insertOne(jewellers);
+        res.send(result);
+    });
 
     // Send a ping to confirm a successful connection
     await client.db("admin").command({ ping: 1 });
