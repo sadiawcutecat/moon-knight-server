@@ -41,12 +41,19 @@ async function run() {
         console.log(result);
         res.send(result);
     })
-    app.post('/api/jewellers',async (req, res) => {
-        const jewellers = req.body;
-        console.log(jewellers);
-        const result = await jewellerCollection.insertOne(jewellers);
+    app.post('/api/jeweller',async (req, res) => {
+        const jeweller = req.body;
+        console.log(jeweller);
+        const result = await jewellerCollection.insertOne(jeweller);
         res.send(result);
     });
+
+    app.get('/api/allJewellers', async(req, res) =>{
+        console.log(req.body);
+        const result = await jewellerCollection.find({}).toArray();
+        console.log(result);
+        res.send(result);
+      })
 
     // Send a ping to confirm a successful connection
     await client.db("admin").command({ ping: 1 });
